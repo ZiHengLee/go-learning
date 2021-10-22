@@ -1,88 +1,70 @@
 package bilinknode
 
-type node struct {
-	key,val    int
-	prev, next *node
+type LinkNode struct {
+	key, val  int
+	pre, next *LinkNode
 }
 
-
-type linkedLRUCache struct {
-	capacity int
-	head,tail *node
-	cache map[int]*node
+type LRUCache struct {
+	m          map[int]*LinkNode // 指向哈希表的指针
+	cap        int               // 长度
+	head, tail *LinkNode         // 两个哨兵
 }
 
-
-
-func LRUCache(capacity int) LRU {
-	return &linkedLRUCache{capacity:capacity,cache:make(map[int]*node)}
+func Constructor(capacity int) LRUCache {
+	//采用虚拟头尾节点，这两个节点始终处于首位，但不计入map中
+	head := &LinkNode{-1, 0, nil, nil}
+	tail := &LinkNode{-1, 0, nil, nil}
+	head.next = tail
+	tail.pre = head
+	return LRUCache{make(map[int]*LinkNode), capacity, head, tail}
 }
 
-
-type LRU interface {
-	Get(key int) int
-	Put(key, value int)
-}
-
-
-func (c *linkedLRUCache) Get(key int) int {
-	if node,ok := c.cache[key]; ok {
-		c.remove(node)
-		c.add(node)
+func (this *LRUCache) Get(key int) int {
+	m := this.m
+	if node, ok := m[key]; ok {
+		this.moveToHead(node)
 		return node.val
 	}
 	return -1
 }
 
-
-func (c *linkedLRUCache) Put(key, val int) {
-	if n,ok := c.cache[key]; ok {
-		c.remove(n)
-		n.val = val
-		c.add(n)
-		return
-	}else {
-		n = &node{key: key,val:val}
-		c.cache[key] = n
-		c.add(n)
+func (this *LRUCache) moveToHead(node *LinkNode) {
+	if node.pre != nil && node.next != nil{
+		node.pre.next = node.next
+		node.next.pre = node.pre
 	}
-
-	if len(c.cache) > c.capacity {
-		delete(c.cache,c.tail.key)
-		c.remove(c.tail)
-	}
+	node.pre = this.head
+	node.next = this.head.next
+	this.head.next.pre = node
+	this.head.next = node
 }
 
-//add node to head
-func (c *linkedLRUCache) add(n *node) {
-	if c.head != nil {
-		c.head.prev = n
-		n.next = c.head
-	}
-
-	c.head = n
-	if c.tail == nil {
-		c.tail = n
-		c.tail.prev = n
-		c.tail.next = nil
-	}
-}
-
-//remove node
-func (c *linkedLRUCache) remove(n *node) {
-	//remove head node
-	if c.head == n {
-		if n.next != nil {
-			n.next.prev = nil
+func (this *LRUCache) Put(key int, value int) {
+	m := this.m
+	cap := this.cap
+	tail := this.tail
+	if node, ok := m[key]; ok {
+		//插入新的值
+		node.val = value
+		this.moveToHead(node)
+	} else {
+		newNode := &LinkNode{key, value, nil, nil}
+		if len(m) == cap {
+			rmTail := tail.pre
+			rmTail.pre.next = tail
+			tail.pre =rmTail.pre
+			rmTail.next = nil
+			delete(m, rmTail.key)
 		}
-		c.head = n.next
-		return
+		this.moveToHead(newNode)
+		m[key] = newNode
 	}
-	//remove tail node
-	if c.tail == n {
-		c.tail = c.tail.prev
-		return
-	}
-	n.prev.next = n.next
-	n.next.prev = n.prev
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * obj := Constructor(capacity);
+ * param_1 := obj.Get(key);
+ * obj.Put(key,value);
+ */
