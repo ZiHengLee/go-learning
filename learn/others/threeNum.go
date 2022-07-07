@@ -9,46 +9,46 @@ package others
 func threeSum(nums []int) [][]int {
 	nums = sort(nums)
 	ret := make([][]int, 0)
-	for i:=0;i< len(nums)-2;i++{
-		if i >= 1 && nums[i] == nums[i-1]{
+	for i := 0; i < len(nums)-2; i++ {
+		if i >= 1 && nums[i] == nums[i-1] {
 			continue
 		}
-		tempArray := make([]int,0)
-		if nums[i] > 0{
+		tempArray := make([]int, 0)
+		if nums[i] > 0 {
 			break
 		}
 		tempArray = append(tempArray, nums[i])
-		left := i+1
-		right := len(nums)-1
-		for ;left<right;{
-			if left > i+1 && nums[left] == nums[left-1]{
-				left+=1
+		left := i + 1
+		right := len(nums) - 1
+		for left < right {
+			if left > i+1 && nums[left] == nums[left-1] {
+				left += 1
 				continue
-			}else if right < len(nums)-1 && nums[right] == nums[right+1]{
-				right-=1
+			} else if right < len(nums)-1 && nums[right] == nums[right+1] {
+				right -= 1
 				continue
 			}
 			//fmt.Println(nums[i],nums[left],nums[right])
-			if nums[i] + nums[left] +nums[right] == 0 {
+			if nums[i]+nums[left]+nums[right] == 0 {
 				helpArray := tempArray
 				helpArray = append(helpArray, nums[left], nums[right])
 				ret = append(ret, helpArray)
-				left+=1
-				right-=1
-			}else if nums[i] + nums[left] +nums[right] < 0{
-				left+=1
-			}else{
-				right-=1
+				left += 1
+				right -= 1
+			} else if nums[i]+nums[left]+nums[right] < 0 {
+				left += 1
+			} else {
+				right -= 1
 			}
 		}
 	}
 	return ret
 }
 func sort(nums []int) []int {
-	for i:=1 ; i< len(nums) ; i++{
+	for i := 1; i < len(nums); i++ {
 		temp := nums[i]
-		j := i-1
-		for ;j>=0&&temp<nums[j];{
+		j := i - 1
+		for j >= 0 && temp < nums[j] {
 			nums[j+1] = nums[j]
 			j--
 		}

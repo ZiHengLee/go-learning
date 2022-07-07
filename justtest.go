@@ -1,14 +1,13 @@
 package main
 
-
 import (
-	"fmt"
-	"sync"
+	"testing"
+	"time"
 )
-
 
 // 用来统计实例真正创建的次数
 var numCalcsCreated int32
+
 // 创建实例的函数
 func createBuffer() interface{} {
 	// 这里要注意下，非常重要的一点。这里必须使用原子加，不然有并发问题
@@ -17,24 +16,29 @@ func createBuffer() interface{} {
 	buffer := make([]byte, 1024)
 	return &buffer
 }
-func main() {
-	// 创建实例
-	bufferPool := &sync.Pool{
-		New: createBuffer,
-	}
-	numWorkers := 1024 * 10240
-	var wg sync.WaitGroup
-	wg.Add(numWorkers)
-	for i := 0; i < numWorkers; i++ {
-		go func() {
-			defer wg.Done()
-			// 申请一个 buffer 实例
-			buffer := bufferPool.Get()
-			_ = buffer.(*[]byte)
-			// 释放一个 buffer 实例
-			defer bufferPool.Put(buffer)
-		}()
-	}
-	wg.Wait()
-	fmt.Printf("%d buffer objects were created", numCalcsCreated)
+
+//func main() {
+//	// 创建实例
+//	bufferPool := &sync.Pool{
+//		New: createBuffer,
+//	}
+//	numWorkers := 1024 * 10240
+//	var wg sync.WaitGroup
+//	wg.Add(numWorkers)
+//	for i := 0; i < numWorkers; i++ {
+//		go func() {
+//			defer wg.Done()
+//			// 申请一个 buffer 实例
+//			buffer := bufferPool.Get()
+//			_ = buffer.(*[]byte)
+//			// 释放一个 buffer 实例
+//			defer bufferPool.Put(buffer)
+//		}()
+//	}
+//	wg.Wait()
+//	fmt.Printf("%d buffer objects were created", numCalcsCreated)
+//}
+
+func TestHttp(t *testing.T) {
+	time.Unix(12121313, 0).Year()
 }

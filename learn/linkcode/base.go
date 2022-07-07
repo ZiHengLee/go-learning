@@ -37,7 +37,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	newNode := new(ListNode)
 	tempStart := newNode
 	temp1, temp2 := l1, l2
-	for ; temp1 != nil || temp2 != nil; {
+	for temp1 != nil || temp2 != nil {
 		tempNode := new(ListNode)
 		if temp1 != nil && temp2 != nil {
 			if temp1.Val < temp2.Val {
@@ -50,7 +50,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 		} else if temp1 != nil {
 			tempNode.Val = temp1.Val
 			temp1 = temp1.Next
-		} else if temp2 != nil{
+		} else if temp2 != nil {
 			tempNode.Val = temp2.Val
 			temp2 = temp2.Next
 		}
@@ -71,13 +71,13 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 		}
 	}
 	if right == nil {
-		if i == n{
+		if i == n {
 			return head.Next
-		}else{
+		} else {
 			return head
 		}
 	}
-	for ; right.Next != nil; {
+	for right.Next != nil {
 		left = left.Next
 		right = right.Next
 	}

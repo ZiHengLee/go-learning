@@ -1,4 +1,5 @@
 package thestring
+
 //动态规划，当下回文串一定由前一个回文串构成
 func longestPalindrome(s string) string {
 	length := len(s)
@@ -17,12 +18,12 @@ func longestPalindrome(s string) string {
 					dp[j][i] = dp[j+1][i-1] + 2
 				}
 			}
-			if dp[j][i] > maxLenth{
+			if dp[j][i] > maxLenth {
 				maxLenth = dp[j][i]
 				start = j
 				end = i
 			}
 		}
 	}
-	return s[start:end+1]
+	return s[start : end+1]
 }

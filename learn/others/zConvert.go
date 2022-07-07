@@ -2,7 +2,7 @@ package others
 
 //z字形反转
 func convert(s string, numRows int) string {
-	if numRows == 1{
+	if numRows == 1 {
 		return s
 	}
 	sLen := len(s)
@@ -24,25 +24,25 @@ func convert(s string, numRows int) string {
 	for start := 0; start < sLen; start++ {
 		newArray[j][i] = s[start]
 		//fmt.Println(string(newArray[j][i]), j, i,start)
-		if j == numRows-1{
+		if j == numRows-1 {
 			direction = 1
-		}else if j == 0{
+		} else if j == 0 {
 			direction = -1
 		}
-		if direction == 1{
-			i+=1
-			j-=1
-		}else{
-			j+=1
+		if direction == 1 {
+			i += 1
+			j -= 1
+		} else {
+			j += 1
 		}
 	}
 	res := ""
-	for _, v := range newArray{
-		for i,_ := range v{
-			if v[i] == 0{
+	for _, v := range newArray {
+		for i, _ := range v {
+			if v[i] == 0 {
 				continue
 			}
-			res+=string(v[i])
+			res += string(v[i])
 		}
 	}
 	return res
