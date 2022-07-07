@@ -2,30 +2,26 @@ package bilinknode
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"testing"
 )
 
 func TestLRU(t *testing.T) {
-	lRUCache := Constructor(2)
-	lRUCache.Put(2, 1)
-	//fmt.Println(lRUCache.head.val,lRUCache.head.next.val,lRUCache.tail.pre.val,lRUCache.tail.val)
-	lRUCache.Put(2, 2)
-	fmt.Println(lRUCache.Get(2))
-	//fmt.Println(lRUCache.tail.pre.val)
-	lRUCache.Put(1, 1)
-	//ListPrint(lRUCache.head)
-	//fmt.Println(lRUCache.Get(2))
-	lRUCache.Put(4, 1)
-	//ListPrint(lRUCache.head)
-	fmt.Println(lRUCache.Get(1))
-	fmt.Println(lRUCache.Get(3))
-	fmt.Println(lRUCache.Get(4))
+	a := "皮友21312312a"
+	if strings.HasPrefix(a, "皮友") {
+		_, numErr := strconv.Atoi(strings.ReplaceAll(a, "皮友", ""))
+		if numErr == nil {
+			print("haha")
+		}
+
+	}
 }
-func ListPrint(node *LinkNode){
-	for i := node;i!= nil;{
+func ListPrint(node *LinkNode) {
+	for i := node; i != nil; {
 		fmt.Print(i.val)
 		fmt.Print("-")
-		i=i.next
+		i = i.next
 	}
 	fmt.Println()
 }

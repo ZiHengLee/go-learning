@@ -30,7 +30,7 @@ func (this *LRUCache) Get(key int) int {
 }
 
 func (this *LRUCache) moveToHead(node *LinkNode) {
-	if node.pre != nil && node.next != nil{
+	if node.pre != nil && node.next != nil {
 		node.pre.next = node.next
 		node.next.pre = node.pre
 	}
@@ -53,7 +53,7 @@ func (this *LRUCache) Put(key int, value int) {
 		if len(m) == cap {
 			rmTail := tail.pre
 			rmTail.pre.next = tail
-			tail.pre =rmTail.pre
+			tail.pre = rmTail.pre
 			rmTail.next = nil
 			delete(m, rmTail.key)
 		}

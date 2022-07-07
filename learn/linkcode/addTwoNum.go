@@ -28,9 +28,9 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			s2 = s2.Next
 		}
 	}
-	if pre >0 {
+	if pre > 0 {
 		help.Val = pre
-	}else{
+	} else {
 		prenode.Next = nil
 	}
 	return res

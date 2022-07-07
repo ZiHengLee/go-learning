@@ -5,6 +5,7 @@ type TreeNode struct {
 	Left  *TreeNode // 左子树
 	Right *TreeNode // 右字树
 }
+
 //层次遍历
 func Level(head *TreeNode) {
 
@@ -29,4 +30,127 @@ func Level(head *TreeNode) {
 		}
 	}
 
+}
+
+func BiSearch(list []int64, num int64) int {
+	low, high := 0, len(list)-1
+	for low <= high {
+		mid := (low + high) / 2
+		if list[mid] > num {
+			high = mid - 1
+		} else if list[mid] < num {
+			low = mid + 1
+		} else {
+			for list[mid] == list[mid+1] {
+				mid = mid + 1
+			}
+			return mid + 1
+		}
+	}
+	print("out")
+	//没有找到
+	return low
+}
+
+//二叉树先序非递归
+func PreOrder(head *TreeNode){
+	if head == nil {
+		return
+	}
+	var myStack []*TreeNode
+	myStack = append(myStack, head)
+	for len(myStack)>0{
+		cur := myStack[len(myStack)-1]
+		myStack = myStack[:len(myStack)-1]
+		print(cur.Data+"-")
+		if cur.Right != nil{
+			myStack = append(myStack, cur.Right)
+		}
+		if cur.Left != nil{
+			myStack = append(myStack, cur.Left)
+		}
+	}
+	return
+}
+//二叉树中序非递归
+func MidOrder(head *TreeNode){
+	if head == nil {
+		return
+	}
+	var myStack []*TreeNode
+	//myStack = append(myStack, head)
+	temp := head
+	for len(myStack)>0 || temp != nil{
+		for temp != nil{
+			myStack = append(myStack, temp)
+			temp = temp.Left
+		}
+		if len(myStack) > 0{
+			temp = myStack[len(myStack)-1]
+			print(temp.Data+"-")
+			myStack = myStack[:len(myStack)-1]
+			temp = temp.Right
+		}
+
+	}
+	return
+}
+
+//二叉树后序非递归
+func PostOrder(head *TreeNode){
+	if head == nil {
+		return
+	}
+	var myStack []*TreeNode
+	temp := head
+	for {
+		for temp != nil{
+			myStack = append(myStack, temp)
+			temp = temp.Left
+		}
+		flag := 1
+		var p *TreeNode
+		for len(myStack) > 0 && flag == 1{
+			temp = myStack[len(myStack)-1]
+			if temp.Right == p{
+				print(temp.Data+"-")
+				myStack = myStack[:len(myStack)-1]
+				p = temp
+			}else{
+				flag = 0
+				temp = temp.Right
+			}
+		}
+		if len(myStack) == 0{
+			break
+		}
+	}
+	return
+}
+
+
+
+func ReBuildTreeByPreMidOrder(pres, mids []string) (head *TreeNode){
+	if len(pres) == 0 || len(mids) ==0{
+		return
+	}
+	head = &TreeNode{Data: pres[0]}
+	mid := 0
+
+
+	for k,v := range mids{
+		if v == pres[0]{
+			mid =k
+			break
+		}
+	}
+	midLeft := mids[:mid]
+	midRight := mids[mid+1:]
+
+	preLeft := pres[1:mid+1]
+	preRight := pres[mid+1:len(pres)]
+
+	head.Left = ReBuildTreeByPreMidOrder(preLeft,midLeft)
+	head.Right = ReBuildTreeByPreMidOrder(preRight,midRight)
+	return
 }

@@ -239,8 +239,8 @@ package others
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	len1 := len(nums1)
 	len2 := len(nums2)
-	left,right := (len1+len2+1)/2,(len1+len2+2)/2
-	return float64(findKthElement(nums1,nums2,left)+findKthElement(nums1,nums2,right))/2
+	left, right := (len1+len2+1)/2, (len1+len2+2)/2
+	return float64(findKthElement(nums1, nums2, left)+findKthElement(nums1, nums2, right)) / 2
 
 }
 
@@ -248,7 +248,7 @@ func findKthElement(nums1, nums2 []int, k int) int {
 	if len(nums1) > len(nums2) {
 		return findKthElement(nums2, nums1, k)
 	}
-	if len(nums1) == 0{
+	if len(nums1) == 0 {
 		return nums2[k-1]
 	}
 	if k == 1 {
@@ -260,9 +260,9 @@ func findKthElement(nums1, nums2 []int, k int) int {
 	}
 	len1, len2 := len(nums1), len(nums2)
 	i, j := minInt(k/2, len1)-1, minInt(k/2, len2)-1
-	if nums1[i] > nums2[j]{
+	if nums1[i] > nums2[j] {
 		return findKthElement(nums1, nums2[j+1:], k-j-1)
-	}else{
+	} else {
 		return findKthElement(nums1[i+1:], nums2, k-i-1)
 	}
 }
