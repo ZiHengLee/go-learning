@@ -66,9 +66,10 @@ func DecayDays(ct int64) (decayRate float64) {
 }
 
 func TestReBuildTree(t *testing.T) {
-	pres,mids:=[]string{"1","2","3"},[]string{"2","1","3"}
+	pres,mids:=[]int{1,2,3},[]int{2,1,3}
 	head := ReBuildTreeByPreMidOrder(pres,mids)
 	//fmt.Printf("%+v", head.Right.Data)
 	//PreOrder(head)
-	PostOrder(head)
+	ret := zigzagLevelOrder(head)
+	fmt.Println(ret)
 }

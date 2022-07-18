@@ -30,3 +30,17 @@ func TestRemoveNthFromEnd(t *testing.T) {
 		}
 	}
 }
+
+func TestCreatLinkListHead(t *testing.T) {
+	a := []int{1,2,3,4,5,6}
+	node := createListNodeTail(a)
+	printLists(node)
+}
+
+func TestReverseKGroup(t *testing.T) {
+	a := []int{1,2,3,4,5}
+	node := createListNodeTail(a)
+	//printLists(node)
+	newNode := reverseKGroup(node.Next,2)
+	printLists(newNode)
+}

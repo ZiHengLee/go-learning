@@ -1,5 +1,7 @@
 package linkcode
 
+import "fmt"
+
 type ListNodeIface interface {
 	Create(array []int64) *ListNode
 }
@@ -84,3 +86,42 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	left.Next = left.Next.Next
 	return head
 }
+
+//遍历链表
+func printLists(head *ListNode){
+	temp := head
+	for temp != nil{
+		fmt.Println(temp.Val)
+		temp = temp.Next
+	}
+}
+
+//头插法建立链表
+func createListNodeHead(a []int) *ListNode{
+	retList := &ListNode{-1,nil}
+	cursor := retList
+	for _, v := range a{
+		newNode := &ListNode{v,nil}
+		newNode.Next = cursor.Next
+		cursor.Next = newNode
+	}
+	return retList
+}
+
+
+
+//尾插法建立链表
+func createListNodeTail(a []int) *ListNode{
+	retList := &ListNode{-1,nil}
+	cursor := retList
+	for _, v := range a{
+		newNode := &ListNode{v,nil}
+		newNode.Next = cursor.Next
+		cursor.Next = newNode
+		cursor = cursor.Next
+	}
+	return retList
+}
+
+
+

@@ -128,3 +128,10 @@ func TestFindKthLargest(t *testing.T) {
 	a := []int{3,2,1,5,6,4}
 	print(heapSort(a,2))
 }
+
+func TestPermutation(t *testing.T) {
+	a := []int{1,2,3,3}
+	retList := make([][]int,0)
+	PermutationInt(a,&retList,0,4)
+	fmt.Println(retList)
+}

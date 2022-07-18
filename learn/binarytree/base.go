@@ -1,18 +1,22 @@
 package binarytree
 
+//type TreeNode struct {
+//	Data  string    // 节点用来存放数据
+//	Left  *TreeNode // 左子树
+//	Right *TreeNode // 右字树
+//}
+
 type TreeNode struct {
-	Data  string    // 节点用来存放数据
-	Left  *TreeNode // 左子树
-	Right *TreeNode // 右字树
+	     Val int
+	     Left *TreeNode
+	     Right *TreeNode
 }
 
 //层次遍历
 func Level(head *TreeNode) {
-
 	if head == nil {
 		return
 	}
-
 	// 用切片模仿队列
 	var queue []*TreeNode
 	queue = append(queue, head)
@@ -21,7 +25,7 @@ func Level(head *TreeNode) {
 		// 队头弹出，再把队头切掉，模仿队列的poll操作
 		cur := queue[0]
 		queue = queue[1:]
-		print(cur.Data)
+		//print(cur.Data)
 		if cur.Left != nil {
 			queue = append(queue, cur.Left)
 		}
@@ -29,8 +33,39 @@ func Level(head *TreeNode) {
 			queue = append(queue, cur.Right)
 		}
 	}
-
 }
+//https://leetcode.cn/problems/binary-tree-level-order-traversal/
+func levelOrder(root *TreeNode) [][]int {
+	ret := make([][]int,0)
+	if root == nil{
+		return ret
+	}
+	var myQueue []*TreeNode
+	myQueue = append(myQueue,root)
+	level := 0
+	for len(myQueue) > 0{
+		var tempQueue []*TreeNode
+		arrLevel := make([]int,0)
+		for len(myQueue) > 0{
+			cur := myQueue[0]
+			myQueue=myQueue[1:]
+			if cur.Left !=nil{
+				tempQueue=append(tempQueue,cur.Left)
+			}
+			if cur.Right !=nil{
+				tempQueue=append(tempQueue,cur.Right)
+			}
+			arrLevel =append(arrLevel,cur.Val)
+		}
+		for _,a := range tempQueue{
+			myQueue = append(myQueue,a)
+		}
+		ret = append(ret, arrLevel)
+		level++
+	}
+	return ret
+}
+
 
 func BiSearch(list []int64, num int64) int {
 	low, high := 0, len(list)-1
@@ -62,7 +97,7 @@ func PreOrder(head *TreeNode){
 	for len(myStack)>0{
 		cur := myStack[len(myStack)-1]
 		myStack = myStack[:len(myStack)-1]
-		print(cur.Data+"-")
+		//print(cur.Data+"-")
 		if cur.Right != nil{
 			myStack = append(myStack, cur.Right)
 		}
@@ -87,11 +122,10 @@ func MidOrder(head *TreeNode){
 		}
 		if len(myStack) > 0{
 			temp = myStack[len(myStack)-1]
-			print(temp.Data+"-")
+			//print(temp.Data+"-")
 			myStack = myStack[:len(myStack)-1]
 			temp = temp.Right
 		}
-
 	}
 	return
 }
@@ -113,7 +147,7 @@ func PostOrder(head *TreeNode){
 		for len(myStack) > 0 && flag == 1{
 			temp = myStack[len(myStack)-1]
 			if temp.Right == p{
-				print(temp.Data+"-")
+				//print(temp.Data+"-")
 				myStack = myStack[:len(myStack)-1]
 				p = temp
 			}else{
@@ -130,11 +164,11 @@ func PostOrder(head *TreeNode){
 
 
 
-func ReBuildTreeByPreMidOrder(pres, mids []string) (head *TreeNode){
+func ReBuildTreeByPreMidOrder(pres, mids []int) (head *TreeNode){
 	if len(pres) == 0 || len(mids) ==0{
 		return
 	}
-	head = &TreeNode{Data: pres[0]}
+	head = &TreeNode{Val: pres[0]}
 	mid := 0
 
 
@@ -148,7 +182,7 @@ func ReBuildTreeByPreMidOrder(pres, mids []string) (head *TreeNode){
 	midRight := mids[mid+1:]
 
 	preLeft := pres[1:mid+1]
-	preRight := pres[mid+1:len(pres)]
+	preRight := pres[mid+1:]
 
 	head.Left = ReBuildTreeByPreMidOrder(preLeft,midLeft)
 	head.Right = ReBuildTreeByPreMidOrder(preRight,midRight)
