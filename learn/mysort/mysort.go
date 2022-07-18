@@ -91,9 +91,11 @@ func bubbleSort(nums []int) []int {
 	return nums
 }
 
+//在完全正序的时候时间复杂度变成了n^2,因此我们需要对第一个数随机一下
 func quickSort(nums []int, s, e int) {
 	i, j := s, e
 	if s < e {
+		swap(nums,s,(s+e)/2)
 		temp := nums[s]
 		for i < j {
 			for i < j && nums[j] >= temp {
@@ -110,6 +112,13 @@ func quickSort(nums []int, s, e int) {
 		quickSort(nums, i+1, e)
 	}
 }
+
+func swap(nums []int, left, right int){
+	temp := nums[left]
+	nums[left] = nums[right]
+	nums[right] = temp
+}
+
 
 func heapSort(nums []int, k int) int{
 	k-=1

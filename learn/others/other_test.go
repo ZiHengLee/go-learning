@@ -17,7 +17,7 @@ import (
 func TestThreeNum(t *testing.T) {
 	nums := []int{-1, 0, 1, 2, -1, -4}
 	fmt.Println(nums[:6])
-	//fmt.Println(threeSum(nums))
+	fmt.Println(threeSum(nums))
 }
 func TestFindMedianSortedArrays(t *testing.T) {
 	tt := time.Now().UTC()

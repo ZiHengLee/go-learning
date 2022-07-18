@@ -6,7 +6,8 @@ import (
 )
 
 func TestSortHalf(t *testing.T) {
-	a := []int{3,2,1,5,6,4}
+	a := []int{5,1,1,2,0,0}
 
-	fmt.Println(heapSort(a,2))
+	quickSort(a,0,5)
+	fmt.Println(a)
 }
