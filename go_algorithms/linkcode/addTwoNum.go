@@ -1,5 +1,6 @@
 package linkcode
 
+//思路：这个题简化很多情况，刚好倒着输出就行了，基本思路尾插法，进位保留到下一位
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	s1 := l1
 	s2 := l2

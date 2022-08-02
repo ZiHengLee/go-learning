@@ -159,3 +159,14 @@ func adjustHeap(nums []int,start,len int){
 	nums[i] = temp
 	return
 }
+
+//func shuffing(arr []int) {
+//	seed := time.Now().UTC().UnixNano()
+//	r := rand.New(rand.NewSource(seed))
+//
+//	N := len(arr)
+//	for i := 0; i < N; i++ {
+//		t := r.Intn(N - i)
+//		arr[i], arr[i+t] = arr[i+t], arr[i]
+//	}
+//}

@@ -44,3 +44,8 @@ func PermutationInt(arrys []int,resList *[][]int,l,r int){
 		arrys[l],arrys[j] = arrys[j],arrys[l]
 	}
 }
+
+//全排列2 https://leetcode.cn/problems/permutations-ii/
+//func permuteUnique(nums []int) [][]int {
+//
+//}

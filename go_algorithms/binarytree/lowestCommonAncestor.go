@@ -6,8 +6,6 @@ package binarytree
 //2个节点和3个节点
 
 
-
-
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	if root == nil{
 		return nil

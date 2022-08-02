@@ -188,3 +188,28 @@ func ReBuildTreeByPreMidOrder(pres, mids []int) (head *TreeNode){
 	head.Right = ReBuildTreeByPreMidOrder(preRight,midRight)
 	return
 }
+
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 || len(inorder) ==0{
+		return nil
+	}
+	head := &TreeNode{Val: preorder[0]}
+	mid := 0
+
+
+	for k,v := range inorder{
+		if v == preorder[0]{
+			mid =k
+			break
+		}
+	}
+	midLeft := inorder[:mid]
+	midRight := inorder[mid+1:]
+
+	preLeft := preorder[1:mid+1]
+	preRight := preorder[mid+1:]
+
+	head.Left = buildTree(preLeft,midLeft)
+	head.Right = buildTree(preRight,midRight)
+	return head
+}

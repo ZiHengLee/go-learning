@@ -67,9 +67,16 @@ func DecayDays(ct int64) (decayRate float64) {
 
 func TestReBuildTree(t *testing.T) {
 	pres,mids:=[]int{1,2,3},[]int{2,1,3}
-	head := ReBuildTreeByPreMidOrder(pres,mids)
+	head := buildTree(pres,mids)
 	//fmt.Printf("%+v", head.Right.Data)
 	//PreOrder(head)
 	ret := zigzagLevelOrder(head)
 	fmt.Println(ret)
+}
+
+func TestMaxPathSum(t *testing.T) {
+	a := TreeNode{Val: -2}
+	b := TreeNode{Val: 1}
+	a.Left = &b
+	fmt.Println(maxPathSum(&a))
 }

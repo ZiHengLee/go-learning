@@ -19,12 +19,26 @@ func TestThreeNum(t *testing.T) {
 	fmt.Println(nums[:6])
 	fmt.Println(threeSum(nums))
 }
+
+func CalculateTimeStart(time,interval int64) (start int64){
+	if interval > 0{
+		start = time/interval*interval
+	}
+	if interval == 86400{
+		start -= 28800
+	}
+	return
+}
 func TestFindMedianSortedArrays(t *testing.T) {
-	tt := time.Now().UTC()
-	//fmt.Println(t)
-	// 获取当前时间戳
-	timestamp := tt.Unix()
-	fmt.Println(timestamp)
+	//t1 := time.Now()
+	//addTime := time.Date(t1.Year(), t1.Month(), t1.Day(), 0, 0, 0, 0, t1.Location())
+	//
+	//fmt.Println(addTime.Unix())
+	now := time.Now().Unix()
+	fmt.Println(CalculateTimeStart(now,300))
+	fmt.Println(CalculateTimeStart(now,60*60))
+	fmt.Println(CalculateTimeStart(now,60*60*4))
+	fmt.Println(CalculateTimeStart(now,86400))
 }
 
 func TestEmoji(t *testing.T) {
@@ -126,4 +140,14 @@ func get_day_continuous(ts int64) (dayContinuous int64, err error) {
 	dayContinuous = int64(t1.Sub(t2).Hours() / 24)
 
 	return
+}
+
+func TestSpiralOrder(t *testing.T) {
+    a := [][]int{[]int{1,2,3},[]int{4,5,6},[]int{7,8,9}}
+	fmt.Println(spiralOrder(a))
+}
+
+func TestMerge(t *testing.T) {
+	a := [][]int{[]int{1,4},[]int{0,2},[]int{3,5}}
+	fmt.Println(merge(a))
 }

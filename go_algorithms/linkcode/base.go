@@ -63,29 +63,29 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 }
 
 //删除倒数第k个节点
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	left := head
-	right := head
-	i := 0
-	for ; i < n; i++ {
-		if right != nil {
-			right = right.Next
-		}
-	}
-	if right == nil {
-		if i == n {
-			return head.Next
-		} else {
-			return head
-		}
-	}
-	for right.Next != nil {
-		left = left.Next
-		right = right.Next
-	}
-	left.Next = left.Next.Next
-	return head
-}
+//func removeNthFromEnd(head *ListNode, n int) *ListNode {
+//	left := head
+//	right := head
+//	i := 0
+//	for ; i < n; i++ {
+//		if right != nil {
+//			right = right.Next
+//		}
+//	}
+//	if right == nil {
+//		if i == n {
+//			return head.Next
+//		} else {
+//			return head
+//		}
+//	}
+//	for right.Next != nil {
+//		left = left.Next
+//		right = right.Next
+//	}
+//	left.Next = left.Next.Next
+//	return head
+//}
 
 //遍历链表
 func printLists(head *ListNode){
@@ -123,5 +123,34 @@ func createListNodeTail(a []int) *ListNode{
 	return retList
 }
 
+//随意给两个位置旋转
+//头插法尾插法结合，关键在于找起始点和结尾点
+func reverseBetween(head *ListNode, left int, right int) *ListNode {
+	retList := &ListNode{-1,nil}
+	cur := head
+	curHead := retList
+	curTail := retList
+	start := 0
+	for cur != nil {
+		newNode := &ListNode{cur.Val,nil}
+		if start>=left-1 && start<right{
+			newNode.Next = curHead.Next
+			curHead.Next = newNode
+			if start == left-1{
+				curTail = newNode
+			}
+			//fmt.Println(curHead.Val,curTail.Val,"f")
+		}else{
+			newNode.Next = curTail.Next
+			curTail.Next = newNode
 
+			curHead = newNode
+			curTail = newNode
+			//fmt.Println(curHead.Val,curTail.Val,"s")
+		}
 
+		cur = cur.Next
+		start++
+	}
+	return retList.Next
+}

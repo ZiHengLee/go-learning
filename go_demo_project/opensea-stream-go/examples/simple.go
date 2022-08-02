@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/foundVanting/opensea-stream-go/entity"
-	"github.com/mitchellh/mapstructure"
-
 	"github.com/foundVanting/opensea-stream-go/opensea"
 	"github.com/foundVanting/opensea-stream-go/types"
+	"github.com/mitchellh/mapstructure"
 	"github.com/nshafer/phx"
 )
 
@@ -60,25 +59,25 @@ func main() {
 	//	}
 	//	fmt.Printf("%+v\n", itemReceivedBidEvent)
 	//})
-	client.OnItemReceivedOffer("*", func(response interface{}) {
-		var itemReceivedOfferEvent entity.ItemReceivedOfferEvent
-		err := mapstructure.Decode(response, &itemReceivedOfferEvent)
-		if err != nil {
-			fmt.Println("mapstructure.Decode err:", err)
-		}
-		fmt.Printf("%+v\n", itemReceivedOfferEvent)
-	})
-	//
-	//client.OnItemMetadataUpdated("*", func(response interface{}) {
-	//	var itemMetadataUpdateEvent entity.ItemMetadataUpdateEvent
-	//	err := mapstructure.Decode(response, &itemMetadataUpdateEvent)
+	//client.OnItemReceivedOffer("*", func(response interface{}) {
+	//	var itemReceivedOfferEvent entity.ItemReceivedOfferEvent
+	//	err := mapstructure.Decode(response, &itemReceivedOfferEvent)
 	//	if err != nil {
 	//		fmt.Println("mapstructure.Decode err:", err)
 	//	}
-	//	//if len(itemMetadataUpdateEvent.Payload.Traits) > 0 {
-	//	fmt.Printf("%+v\n", itemMetadataUpdateEvent)
-	//	//}
+	//	fmt.Printf("%+v\n", itemReceivedOfferEvent)
 	//})
+	//
+	client.OnItemMetadataUpdated("*", func(response interface{}) {
+		var itemMetadataUpdateEvent entity.ItemMetadataUpdateEvent
+		err := mapstructure.Decode(response, &itemMetadataUpdateEvent)
+		if err != nil {
+			fmt.Println("mapstructure.Decode err:", err)
+		}
+		//if len(itemMetadataUpdateEvent.Payload.Traits) > 0 {
+		fmt.Printf("%+v\n", itemMetadataUpdateEvent)
+		//}
+	})
 
 	select {}
 }
