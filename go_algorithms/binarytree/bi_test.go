@@ -80,3 +80,10 @@ func TestMaxPathSum(t *testing.T) {
 	a.Left = &b
 	fmt.Println(maxPathSum(&a))
 }
+
+func TestIsCompleteTree(t *testing.T) {
+	a := TreeNode{Val: -2}
+	b := TreeNode{Val: 1}
+	a.Left = &b
+	fmt.Println(kthLargest(&a,1))
+}

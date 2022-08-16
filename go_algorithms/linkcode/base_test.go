@@ -94,26 +94,20 @@ func TestMergeKLists(t *testing.T) {
 
 func TestQuickSortLists(t *testing.T) {
 	a := &ListNode{1,nil}
-	cur := a
-	for i:=2;i<10;i++{
-		t := &ListNode{i,nil}
-		cur.Next = t
-		cur=cur.Next
-	}
-	//b := &ListNode{4,nil}
-	//c := &ListNode{5,nil}
-	//d := &ListNode{6,nil}
-	//e := &ListNode{2,nil}
-	//f := &ListNode{9,nil}
-	//g := &ListNode{8,nil}
-	//a.Next = b
-	//b.Next = c
-	//c.Next = d
-	//d.Next = e
-	//e.Next = f
+	b := &ListNode{4,nil}
+	c := &ListNode{3,nil}
+	d := &ListNode{2,nil}
+	e := &ListNode{5,nil}
+	f := &ListNode{2,nil}
+	a.Next = b
+	b.Next = c
+	c.Next = d
+	d.Next = e
+	e.Next = f
 	//f.Next = g
-
-
-	res := sortListv1(a)
+	//printLists(a)
+	printLists(a)
+	fmt.Println()
+	res := partitionv1(a,3)
 	printLists(res)
 }

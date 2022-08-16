@@ -36,7 +36,7 @@ func TestOther(t *testing.T) {
 	//
 	//sEnc := base64.StdEncoding.EncodeToString(b)
 	//fmt.Printf("enc=[%s]\n", sEnc)
-	sEnc:= "cj0xJi1waz02MTk1NDAyMDc3"
+	sEnc:= "cj0xJi1waz02MjM4Njg5MDA2"
 	sDec, err := base64.StdEncoding.DecodeString(sEnc)
 	if err != nil {
 		fmt.Printf("base64 decode failure, error=[%v]\n", err)
@@ -44,7 +44,7 @@ func TestOther(t *testing.T) {
 		fmt.Printf("dec=[%s]\n", sDec)
 	}
 
-	a := "r=1&-pk=1"
+	a := "r=1&-pk=6238688822"
 	y := []byte(a)
 	kk := base64.StdEncoding.EncodeToString(y)
 	fmt.Printf("dec=[%s]\n", kk)

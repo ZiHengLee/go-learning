@@ -2,6 +2,7 @@ package others
 
 import (
 	"fmt"
+	"math/big"
 	"net/http"
 	"strings"
 	"testing"
@@ -148,6 +149,28 @@ func TestSpiralOrder(t *testing.T) {
 }
 
 func TestMerge(t *testing.T) {
-	a := [][]int{[]int{1,4},[]int{0,2},[]int{3,5}}
-	fmt.Println(merge(a))
+	mp := map[string]string{
+		"a":"b",
+	}
+	fmt.Println("--"+mp["b"]+"--")
+}
+
+func TestBytes(t *testing.T) {
+	default0 := new(big.Int)
+	default0.SetString("0",10)
+
+	n := new(big.Int)
+	_, ok := n.SetString("0", 10)
+	if !ok {
+		fmt.Println("SetString: error")
+		return
+	}
+	g := make([]byte,32)
+	fmt.Println(n.FillBytes(g))
+
+	m := new(big.Int)
+	n.SetBytes(g)
+	if m.Cmp(default0) == 0{
+		fmt.Println("aaaa")
+	}
 }

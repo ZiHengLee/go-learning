@@ -15,14 +15,14 @@ func main() {
 	})
 	client.Connect()
 
-	//client.OnItemListed("*", func(response interface{}) {
-	//	var itemListedEvent entity.ItemListedEvent
-	//	err := mapstructure.Decode(response, &itemListedEvent)
-	//	if err != nil {
-	//		fmt.Println("mapstructure.Decode err:", err)
-	//	}
-	//	fmt.Printf("%+v\n", itemListedEvent)
-	//})
+	client.OnItemListed("*", func(response interface{}) {
+		var itemListedEvent entity.ItemListedEvent
+		err := mapstructure.Decode(response, &itemListedEvent)
+		if err != nil {
+			fmt.Println("mapstructure.Decode err:", err)
+		}
+		fmt.Printf("%+v\n", itemListedEvent)
+	})
 
 	//client.OnItemSold("collection-slug", func(response interface{}) {
 	//	var itemSoldEvent entity.ItemSoldEvent
@@ -68,16 +68,16 @@ func main() {
 	//	fmt.Printf("%+v\n", itemReceivedOfferEvent)
 	//})
 	//
-	client.OnItemMetadataUpdated("*", func(response interface{}) {
-		var itemMetadataUpdateEvent entity.ItemMetadataUpdateEvent
-		err := mapstructure.Decode(response, &itemMetadataUpdateEvent)
-		if err != nil {
-			fmt.Println("mapstructure.Decode err:", err)
-		}
-		//if len(itemMetadataUpdateEvent.Payload.Traits) > 0 {
-		fmt.Printf("%+v\n", itemMetadataUpdateEvent)
-		//}
-	})
+	//client.OnItemMetadataUpdated("*", func(response interface{}) {
+	//	var itemMetadataUpdateEvent entity.ItemMetadataUpdateEvent
+	//	err := mapstructure.Decode(response, &itemMetadataUpdateEvent)
+	//	if err != nil {
+	//		fmt.Println("mapstructure.Decode err:", err)
+	//	}
+	//	//if len(itemMetadataUpdateEvent.Payload.Traits) > 0 {
+	//	fmt.Printf("%+v\n", itemMetadataUpdateEvent)
+	//	//}
+	//})
 
 	select {}
 }
