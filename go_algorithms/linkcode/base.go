@@ -88,34 +88,32 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 //}
 
 //遍历链表
-func printLists(head *ListNode){
+func printLists(head *ListNode) {
 	temp := head
-	for temp != nil{
+	for temp != nil {
 		fmt.Println(temp.Val)
 		temp = temp.Next
 	}
 }
 
-//头插法建立链表
-func createListNodeHead(a []int) *ListNode{
-	retList := &ListNode{-1,nil}
+//头插法建立链表，总是插在第一个节点的后面
+func createListNodeHead(a []int) *ListNode {
+	retList := &ListNode{-1, nil}
 	cursor := retList
-	for _, v := range a{
-		newNode := &ListNode{v,nil}
+	for _, v := range a {
+		newNode := &ListNode{v, nil}
 		newNode.Next = cursor.Next
 		cursor.Next = newNode
 	}
 	return retList
 }
 
-
-
 //尾插法建立链表
-func createListNodeTail(a []int) *ListNode{
-	retList := &ListNode{-1,nil}
+func createListNodeTail(a []int) *ListNode {
+	retList := &ListNode{-1, nil}
 	cursor := retList
-	for _, v := range a{
-		newNode := &ListNode{v,nil}
+	for _, v := range a {
+		newNode := &ListNode{v, nil}
 		newNode.Next = cursor.Next
 		cursor.Next = newNode
 		cursor = cursor.Next
@@ -126,21 +124,21 @@ func createListNodeTail(a []int) *ListNode{
 //随意给两个位置旋转
 //头插法尾插法结合，关键在于找起始点和结尾点
 func reverseBetween(head *ListNode, left int, right int) *ListNode {
-	retList := &ListNode{-1,nil}
+	retList := &ListNode{-1, nil}
 	cur := head
 	curHead := retList
 	curTail := retList
 	start := 0
 	for cur != nil {
-		newNode := &ListNode{cur.Val,nil}
-		if start>=left-1 && start<right{
+		newNode := &ListNode{cur.Val, nil}
+		if start >= left-1 && start < right {
 			newNode.Next = curHead.Next
 			curHead.Next = newNode
-			if start == left-1{
+			if start == left-1 {
 				curTail = newNode
 			}
 			//fmt.Println(curHead.Val,curTail.Val,"f")
-		}else{
+		} else {
 			newNode.Next = curTail.Next
 			curTail.Next = newNode
 

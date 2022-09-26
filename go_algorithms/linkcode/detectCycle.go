@@ -10,12 +10,10 @@ func detectCycle(head *ListNode) *ListNode {
 	slow := head
 	fast := head.Next
 	for fast != nil {
-		//fmt.Println(slow.Val,fast.Val)
 		if fast == slow {
 			fast := head
-			//slow = slow.next其实有点不是特别能理解
+			//减去共同的那一段，剩下的两段是相等的
 			slow = slow.Next
-			//fmt.Println(fast.Val,slow.Val)
 			for fast != slow {
 				fast = fast.Next
 				slow = slow.Next
@@ -23,7 +21,6 @@ func detectCycle(head *ListNode) *ListNode {
 			return fast
 		}
 		slow = slow.Next
-		//fmt.Println(slow.Val)
 		if slow == nil {
 			return nil
 		}

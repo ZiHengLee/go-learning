@@ -6,18 +6,18 @@ package linkcode
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	var lenList int
 	temp := head
-	for temp != nil{
+	for temp != nil {
 		temp = temp.Next
 		lenList++
 	}
-	retHeader := &ListNode{-1,nil}
+	retHeader := &ListNode{-1, nil}
 	curOrigin := head
 	curNow := retHeader
-	for i :=0; i<lenList/k; i++{
+	for i := 0; i < lenList/k; i++ {
 		var newTemp *ListNode
 		lastNode := curNow
-		for j := 0;j < k; j++{
-			if j==0 {
+		for j := 0; j < k; j++ {
+			if j == 0 {
 				lastNode = curOrigin
 			}
 
@@ -28,7 +28,7 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 		}
 		curNow = lastNode
 	}
-	for curOrigin != nil{
+	for curOrigin != nil {
 		curNow.Next = curOrigin
 		curOrigin = curOrigin.Next
 		curNow = curNow.Next
@@ -37,9 +37,9 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 }
 
 func reverseList(head *ListNode) *ListNode {
-	retList := &ListNode{-1,nil}
+	retList := &ListNode{-1, nil}
 	curOrigin := head
-	for curOrigin != nil{
+	for curOrigin != nil {
 		temp := curOrigin.Next
 		curOrigin.Next = retList.Next
 		retList.Next = curOrigin

@@ -1,13 +1,11 @@
 package linkcode
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
 
 //对链表进行排序
-//方法1
 //是归并排序，关键在于每次找到中间的分割点
 func sortList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
@@ -46,29 +44,27 @@ func mergeSort(first *ListNode, len int) *ListNode {
 		}
 		return mergeTwoLists(newLeft, newRight)
 	}
-	return nil
 }
 
 //方法2，使用快排，小的链接到前一段，大的链接后一段
 func sortListv1(head *ListNode) *ListNode {
-	if head == nil||head.Next==nil{
+	if head == nil || head.Next == nil {
 		return head
 	}
 	ret := &ListNode{Val: -1}
 	currr := ret
 	//ret.Next = head
-	tempArr := make([]int,0)
+	tempArr := make([]int, 0)
 	cur := head
-	for cur != nil{
+	for cur != nil {
 		tempArr = append(tempArr, cur.Val)
 		cur = cur.Next
 	}
 	shuffing(tempArr)
-	fmt.Println(tempArr)
-	for _,a:= range tempArr{
+	for _, a := range tempArr {
 		b := &ListNode{Val: a}
 		currr.Next = b
-		currr=currr.Next
+		currr = currr.Next
 	}
 
 	quickSort(ret, head, nil)
@@ -76,8 +72,8 @@ func sortListv1(head *ListNode) *ListNode {
 }
 
 func quickSort(ret, head, tail *ListNode) {
-	if head != tail{
-		swap(head,tail)
+	if head != tail {
+		swap(head, tail)
 		mid := partition(ret, head)
 		quickSort(ret, ret.Next, mid)
 		quickSort(mid, mid.Next, tail)
@@ -107,9 +103,9 @@ func partition(ret, head *ListNode) *ListNode {
 	return mid
 }
 
-func swap(start,end *ListNode){
-	slow,fast := start,start.Next
-	for fast != end && fast.Next != end{
+func swap(start, end *ListNode) {
+	slow, fast := start, start.Next
+	for fast != end && fast.Next != end {
 		slow = slow.Next
 		fast = fast.Next.Next
 	}
@@ -118,6 +114,7 @@ func swap(start,end *ListNode){
 	slow.Val = start.Val
 	start.Val = tmp
 }
+
 //func swap(start,end *ListNode){
 //	cur := start
 //	len := 0

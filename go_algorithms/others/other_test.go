@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"math/big"
 	"net/http"
+	"runtime"
+	"strconv"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -21,11 +24,11 @@ func TestThreeNum(t *testing.T) {
 	fmt.Println(threeSum(nums))
 }
 
-func CalculateTimeStart(time,interval int64) (start int64){
-	if interval > 0{
-		start = time/interval*interval
+func CalculateTimeStart(time, interval int64) (start int64) {
+	if interval > 0 {
+		start = time / interval * interval
 	}
-	if interval == 86400{
+	if interval == 86400 {
 		start -= 28800
 	}
 	return
@@ -36,10 +39,10 @@ func TestFindMedianSortedArrays(t *testing.T) {
 	//
 	//fmt.Println(addTime.Unix())
 	now := time.Now().Unix()
-	fmt.Println(CalculateTimeStart(now,300))
-	fmt.Println(CalculateTimeStart(now,60*60))
-	fmt.Println(CalculateTimeStart(now,60*60*4))
-	fmt.Println(CalculateTimeStart(now,86400))
+	fmt.Println(CalculateTimeStart(now, 300))
+	fmt.Println(CalculateTimeStart(now, 60*60))
+	fmt.Println(CalculateTimeStart(now, 60*60*4))
+	fmt.Println(CalculateTimeStart(now, 86400))
 }
 
 func TestEmoji(t *testing.T) {
@@ -144,33 +147,52 @@ func get_day_continuous(ts int64) (dayContinuous int64, err error) {
 }
 
 func TestSpiralOrder(t *testing.T) {
-    a := [][]int{[]int{1,2,3},[]int{4,5,6},[]int{7,8,9}}
+	a := [][]int{[]int{1, 2, 3}, []int{4, 5, 6}, []int{7, 8, 9}}
 	fmt.Println(spiralOrder(a))
 }
 
 func TestMerge(t *testing.T) {
 	mp := map[string]string{
-		"a":"b",
+		"a": "b",
 	}
-	fmt.Println("--"+mp["b"]+"--")
+	fmt.Println("--" + mp["b"] + "--")
 }
 
 func TestBytes(t *testing.T) {
-	default0 := new(big.Int)
-	default0.SetString("0",10)
+	m := big.NewInt(100)
+	zeroBytes := make([]byte, 32)
+	fmt.Println(m.String())
+	m.FillBytes(zeroBytes)
+	fmt.Println(m.Bytes())
+	fmt.Println(zeroBytes)
 
-	n := new(big.Int)
-	_, ok := n.SetString("0", 10)
-	if !ok {
-		fmt.Println("SetString: error")
-		return
-	}
-	g := make([]byte,32)
-	fmt.Println(n.FillBytes(g))
+	i := new(big.Int)
+	i.SetBytes(zeroBytes)
+	fmt.Println(i.Int64())
+}
 
-	m := new(big.Int)
-	n.SetBytes(g)
-	if m.Cmp(default0) == 0{
-		fmt.Println("aaaa")
+func TestRunTime(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	wg := sync.WaitGroup{}
+	wg.Add(20)
+	for i := 0; i < 10; i++ {
+		go func() {
+			fmt.Println("A", i)
+			wg.Done()
+		}()
 	}
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			fmt.Println("B", i)
+			wg.Done()
+		}(i)
+	}
+
+	wg.Wait()
+}
+
+func TestRunTime1(t *testing.T) {
+	var a float64 = 1.8899999856948853
+	startStr := strconv.FormatFloat(a, 'f', 3, 32)
+	fmt.Println(startStr)
 }

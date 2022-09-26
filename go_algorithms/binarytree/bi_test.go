@@ -66,11 +66,11 @@ func DecayDays(ct int64) (decayRate float64) {
 }
 
 func TestReBuildTree(t *testing.T) {
-	pres,mids:=[]int{1,2,3},[]int{2,1,3}
-	head := buildTree(pres,mids)
+	pres, mids := []int{1, 2, 3}, []int{2, 1, 3}
+	head := buildTree(pres, mids)
 	//fmt.Printf("%+v", head.Right.Data)
 	//PreOrder(head)
-	ret := zigzagLevelOrder(head)
+	ret := isValidBST(head)
 	fmt.Println(ret)
 }
 
@@ -82,8 +82,14 @@ func TestMaxPathSum(t *testing.T) {
 }
 
 func TestIsCompleteTree(t *testing.T) {
-	a := TreeNode{Val: -2}
-	b := TreeNode{Val: 1}
+	a := TreeNode{Val: 5}
+	b := TreeNode{Val: 3}
+	c := TreeNode{Val: 9}
+	d := TreeNode{Val: -10}
+	e := TreeNode{Val: 2}
 	a.Left = &b
-	fmt.Println(kthLargest(&a,1))
+	a.Right = &c
+	b.Left = &d
+	b.Right = &e
+	recoverTree(&a)
 }
