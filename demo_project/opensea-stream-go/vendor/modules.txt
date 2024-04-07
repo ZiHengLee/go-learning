@@ -1,0 +1,9 @@
+# github.com/gorilla/websocket v1.5.0
+## explicit; go 1.12
+github.com/gorilla/websocket
+# github.com/mitchellh/mapstructure v1.5.0
+## explicit; go 1.14
+github.com/mitchellh/mapstructure
+# github.com/nshafer/phx v0.2.0
+## explicit; go 1.18
+github.com/nshafer/phx
